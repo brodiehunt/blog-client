@@ -1,6 +1,10 @@
-const ErrorPage = () => {
+const ErrorPage = ({message}) => {
   return (
-    <div>This is the error page</div>
+    <>
+      {message && <h1>{message}</h1>}
+      <div>This is the error page</div>
+    </>
+    
   )
 }
 

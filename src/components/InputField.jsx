@@ -8,6 +8,7 @@ const InputField = ({
   errorMessage,
   onChange,
   onBlur,
+  elRef,
 }) => {
   return (
     <div className="input-conatiner">
@@ -20,6 +21,7 @@ const InputField = ({
         placeholder={placeholder}
         onChange={onChange}
         onBlur={onBlur}
+        ref={elRef}
       />
       {errorMessage &&
         <div

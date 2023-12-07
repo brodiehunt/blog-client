@@ -53,3 +53,14 @@ export const validatePasswordConfirm = (password, passwordConfirm) => {
 
   return validationErrors
 }
+
+export const validateRegisterForm = (formData) => {
+  const { username, email, password, passwordConfirm } = formData;
+  const newInputErrors = {
+    username: validateUsername(username),
+    email: validateEmail(email),
+    password: validatePassword(password),
+    passwordConfirm: validatePasswordConfirm(password, passwordConfirm)
+  }
+  return newInputErrors;
+}

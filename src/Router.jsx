@@ -23,6 +23,10 @@ const Router = () => {
           element: <Home />,
         },
         {
+          path: '/error',
+          element: <ErrorPage />
+        },
+        {
           path: '/login',
           element: <Login />,
         },
