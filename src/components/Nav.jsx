@@ -1,6 +1,17 @@
+import {Link} from 'react-router-dom';
+
 const Nav = () => {
+
+  const handleSignOut = () => {
+    /// handle dispatch here
+  }
+  
   return (
-    <div>This is the nav</div>
+    <nav>
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
+      <button onClick={handleSignOut}>Sign out</button>
+    </nav>
   )
 }
 

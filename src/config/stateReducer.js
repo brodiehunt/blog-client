@@ -6,12 +6,6 @@ export default function stateReducer(state, action) {
         loggedInUser: action.data
       }
     }
-    case "updateUserInfo": {
-      return {
-        ...state,
-        loggedInUser: action.data
-      }
-    }
     case "setBlogPosts": {
       return {
         ...state,
