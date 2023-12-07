@@ -6,7 +6,12 @@ import FormButton from "./FormButton";
 const PostForm = ({initialData, type}) => {
   const [formData, setFormData] = useState(initialData);
   const [inputErrors, setInputErrors ] = useState({title: '', content: ''});
-  console.log(formData);
+  const [isLoading, setIsLoading] = useState(null);
+  const fieldRefs = {
+    title: useRef(),
+    content: useRef(),
+  }
+  console.log(inputErrors);
 
   const handleInputChange = (event) => {
     const {name, value, checked} = event.target;
@@ -31,6 +36,18 @@ const PostForm = ({initialData, type}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const newInputErrors = validatePostForm(formData);
+    
+    const firstErrorField = Object.keys(newInputErrors).find(field => newInputErrors[field]);
+    
+    if (firstErrorField && fieldRefs[firstErrorField].current) {
+      setInputErrors(newInputErrors);
+      return fieldRefs[firstErrorField].current.focus();
+    }
+
+    // Do api call here. 
+    console.log('Success, will now try to access api')
   }
 
   return (
@@ -42,6 +59,7 @@ const PostForm = ({initialData, type}) => {
         value={formData.title}
         onBlur={handleBlur}
         onChange={handleInputChange}
+        elRef={fieldRefs.title}
         errorMessage={inputErrors.title}
 
       >
@@ -56,6 +74,7 @@ const PostForm = ({initialData, type}) => {
         value={formData.content}
         onBlur={handleBlur}
         onChange={handleInputChange}
+        elRef={fieldRefs.content}
         errorMessage={inputErrors.content}
 
       >
