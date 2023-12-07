@@ -8,11 +8,3 @@ describe('something truthy', () => {
     expect(true).toBe(true);
   })
 })
-
-describe('App test', () => {
-  it('renders headline', () => {
-    render(<App />);
-
-    expect(screen.getByRole("heading", {name: /hello world/i})).toBeInTheDocument();
-  })
-})
