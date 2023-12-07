@@ -64,3 +64,12 @@ export const validateRegisterForm = (formData) => {
   }
   return newInputErrors;
 }
+
+export const validateLoginForm = (formData) => {
+  const { email, password } = formData;
+  const newInputErrors = {
+    email: validateEmail(email),
+    password: validatePassword(password),
+  };
+  return newInputErrors;
+}

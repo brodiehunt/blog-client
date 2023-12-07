@@ -1,5 +1,22 @@
 import api from '../config/api';
 
+function formatValidationErrors(errorsArray) {
+  const errorsObject = errorsArray.reduce((acc, error) => {
+    // pull the first key val out of single error object
+    const [key, value] = Object.entries(error)[0];
+    
+    if (acc[key]) {
+      // If the key already exists, concatenate the new error message
+      acc[key] += ` ${value}`;
+    } else {
+      // Otherwise, add the key-value pair
+      acc[key] = value;
+    }
+  
+    return acc;
+  }, {});
+  return errorsObject;
+}
 
 export const registerUser = async (userInfo) => {
   try {
@@ -17,20 +34,7 @@ export const registerUser = async (userInfo) => {
 
       if (status === 400) {
 
-        const errorsObject = serverError.reduce((acc, error) => {
-          // pull the first key val out of single error object
-          const [key, value] = Object.entries(error)[0];
-          
-          if (acc[key]) {
-            // If the key already exists, concatenate the new error message
-            acc[key] += ` ${value}`;
-          } else {
-            // Otherwise, add the key-value pair
-            acc[key] = value;
-          }
-        
-          return acc;
-        }, {});
+        const errorsObject = formatValidationErrors(serverError)
         
         return {data: null, error: {validationError: errorsObject, conflictError: null }}
       }
@@ -42,4 +46,35 @@ export const registerUser = async (userInfo) => {
     }
   }
   
+}
+
+export const loginUser = async (userInfo) => {
+  
+  try {
+   
+    const response = await api.post('/api/auth/login', userInfo);
+    return {data: response.data.data, error: null}
+  } catch(error) {
+    
+    if (error.response) {
+      
+      const status = error.response.status;
+      const serverError = error.response.data.error;
+      
+      if (Array.isArray(serverError)) {
+        
+        const errorsObject = formatValidationErrors(serverError);
+        return {data: null, error: {validationError: errorsObject, credentialError: null }}
+      }
+
+      if (serverError.msg === 'Incorrect email or password') {
+        return {data: null, error: {validationError: null, credentialError: serverError.msg}}
+      }
+
+      throw new Error(serverError.msg)
+    } else {
+     
+      throw new Error('Network error or no response from the server');
+    }
+  }
 }

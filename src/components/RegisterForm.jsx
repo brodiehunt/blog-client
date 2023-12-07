@@ -43,10 +43,10 @@ const RegisterForm = () => {
     const firstErrorField = Object.keys(newInputErrors).find(field => newInputErrors[field]);
 
     // Sets focus on first error element - sets errorState (in case submit without touching feilds)
-    // if (firstErrorField && fieldRefs[firstErrorField].current) {
-    //   fieldRefs[firstErrorField].current.focus();
-    //   return setInputErrors(newInputErrors);
-    // }
+    if (firstErrorField && fieldRefs[firstErrorField].current) {
+      fieldRefs[firstErrorField].current.focus();
+      return setInputErrors(newInputErrors);
+    }
     
     // Set Loading state before async operation so it is updated while waiting
     setIsLoading(true);
