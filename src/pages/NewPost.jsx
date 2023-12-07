@@ -1,6 +1,17 @@
-const NewPost = () => {
+import PostForm from '../components/PostForm.jsx';
+const NewPost = ({}) => {
+  const initialData = {
+    title: '',
+    content: '',
+    published: false
+  }
   return (
-    <div>THis is the new post component</div>
+    <div>
+      <PostForm 
+        initialData={initialData} 
+        type="Add"
+      />
+    </div>
   )
 }
 

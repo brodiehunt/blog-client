@@ -4,6 +4,7 @@ const InputField = ({
   name,
   value,
   id,
+  rows,
   placeholder,
   errorMessage,
   onChange,
@@ -13,16 +14,31 @@ const InputField = ({
   return (
     <div className="input-conatiner">
       <label htmlFor={id}>{children}</label>
-      <input
-        type={type}
-        name={name}
-        value={value}
-        id={id}
-        placeholder={placeholder}
-        onChange={onChange}
-        onBlur={onBlur}
-        ref={elRef}
-      />
+      {type === 'textarea' 
+        ? <textarea
+            name={name}
+            id={id}
+            value={value}
+            onBlur={onBlur}
+            onChange={onChange}
+            ref={elRef}
+            placeholder={placeholder}
+            rows={rows}
+          >
+
+          </textarea>
+        : <input
+            type={type}
+            name={name}
+            value={value}
+            checked={type === 'checkbox' ? value : ''}
+            id={id}
+            placeholder={placeholder}
+            onChange={onChange}
+            onBlur={onBlur}
+            ref={elRef}
+          />   
+      }
       {errorMessage &&
         <div
           role="alert"

@@ -54,6 +54,30 @@ export const validatePasswordConfirm = (password, passwordConfirm) => {
   return validationErrors
 }
 
+export const validatePostTitle = (title) => {
+  let validationErrors = '';
+
+  if (!title) {
+    validationErrors += 'Title is required. ';
+  }
+
+  if (title.length > 100 ) {
+    validationErrors += 'Title should be 1 - 100 characters long';
+  }
+
+  return validationErrors;
+}
+
+export const validatePostContent = (content) => {
+  let validationErrors = '';
+
+  if (!content) {
+    validationErrors = 'Blog post content is required.'
+  }
+
+  return validationErrors;
+}
+
 export const validateRegisterForm = (formData) => {
   const { username, email, password, passwordConfirm } = formData;
   const newInputErrors = {
@@ -71,5 +95,14 @@ export const validateLoginForm = (formData) => {
     email: validateEmail(email),
     password: validatePassword(password),
   };
+  return newInputErrors;
+}
+
+export const validatePostForm = (formData) => {
+  const { title, content } = formData;
+  const newInputErrors = {
+    title: validatePostTitle(title),
+    content: validatePostContent(content),
+  }
   return newInputErrors;
 }
