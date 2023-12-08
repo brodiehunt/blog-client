@@ -6,7 +6,11 @@ import InputField from "./InputField";
 import FormButton from "./FormButton";
 
 const PostForm = ({initialData, type, apiFunc}) => {
-  const [formData, setFormData] = useState(initialData);
+  const [formData, setFormData] = useState({
+    title: initialData.title || '', 
+    content: initialData.content || '', 
+    published: initialData.published || false
+  });
   const [inputErrors, setInputErrors ] = useState({title: '', content: ''});
   const [postError, setPostError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
@@ -53,21 +57,22 @@ const PostForm = ({initialData, type, apiFunc}) => {
     }
 
     // Do api call here. 
-    console.log('Success, will now try to access api')
+    console.log('Success, will now try to access api');
+    const newBlogPost = {
+      ...initialData, 
+      title: formData.title, 
+      content: formData.content, 
+      published: formData.published
+    }
     setIsLoading(true)
-    apiFunc(formData).then((response) => {
+    apiFunc(newBlogPost).then((response) => {
       if (response.error) {
         return setPostError(response.error);
       }
-
-      dispatch({
-        type: "addBlogPost",
-        data: response.post
-      })
       setPostError(null);
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       navigate('/error', {message: error.message});
     })
     .finally(() => setIsLoading(false))
@@ -76,6 +81,7 @@ const PostForm = ({initialData, type, apiFunc}) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {postError && <div>{postError}</div>}
       <InputField
         type="text"
         name="title"

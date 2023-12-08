@@ -31,7 +31,10 @@ const BlogPosts = () => {
   // Construct the BlogPost Cards Here. 
   const posts = store.blogPosts.map((item) => {
     return (
-      <div key={item._id}>{item.title}</div>
+      <div key={item._id}>
+        {item.title}
+        <Link to={`/posts/${item._id}/update`} >Update</Link>
+      </div>
     )
   })
   return (

@@ -19,3 +19,13 @@ export const addBlogPost = async (postData) => {
     return {error: error.message};
   }
 }
+
+export const updateBlogPost = async (postData) => {
+  try {
+    const response = await api.put(`/api/user/posts/${postData._id}`, (postData));
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    return {error: error.message};
+  }
+}

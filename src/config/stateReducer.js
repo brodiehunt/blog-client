@@ -23,7 +23,7 @@ export default function stateReducer(state, action) {
     case "updateBlogPost": {
       const newState = [...state.blogPosts];
       const updatedState = newState.map((item) => {
-        if (item.id === action.data.id) {
+        if (item._id === action.data._id) {
           return action.data;
         }
         return item;
@@ -34,7 +34,7 @@ export default function stateReducer(state, action) {
       }
     }
     case "deleteBlogPost": {
-      const newState = state.blogPosts.filter((item) => item.id !== action.data.id);
+      const newState = state.blogPosts.filter((item) => item._id !== action.data._id);
       return {
         ...state,
         blogPosts: newState
