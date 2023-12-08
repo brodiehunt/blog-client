@@ -1,15 +1,15 @@
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import App from './App.jsx';
-import ErrorPage from './pages/ErrorPage.jsx';
-import Home from './pages/Home.jsx';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
-import BlogPosts from './pages/BlogPosts.jsx';
-import BlogPost from './pages/BlogPost.jsx';
-import NewPost from './pages/NewPost.jsx';
-import UpdatePost from './pages/UpdatePost.jsx';
-import Profile from './pages/Profile.jsx';
-
+import App from '../App.jsx';
+import ErrorPage from '../pages/ErrorPage.jsx';
+import Home from '../pages/Home.jsx';
+import Login from '../pages/Login.jsx';
+import Register from '../pages/Register.jsx';
+import BlogPosts from '../pages/BlogPosts.jsx';
+import BlogPost from '../pages/BlogPost.jsx';
+import NewPost from '../pages/NewPost.jsx';
+import UpdatePost from '../pages/UpdatePost.jsx';
+import Profile from '../pages/Profile.jsx';
+import RequireAuth from './RequireAuth.jsx';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -36,23 +36,23 @@ const Router = () => {
         },
         {
           path: '/posts',
-          element: <BlogPosts />,
+          element: <RequireAuth><BlogPosts /></RequireAuth>,
         },
         {
           path: '/posts/new',
-          element: <NewPost />,
+          element: <RequireAuth><NewPost /></RequireAuth>,
         },
         {
           path: '/posts/:postId',
-          element: <BlogPost />,
+          element: <RequireAuth><BlogPost /></RequireAuth>,
         },
         {
           path: '/posts/:postId/update',
-          element: <UpdatePost />,
+          element: <RequireAuth><UpdatePost /></RequireAuth>,
         },
         {
           path: '/profile',
-          element: <Profile />,
+          element: <RequireAuth><Profile /></RequireAuth>,
         }
       ]
     }

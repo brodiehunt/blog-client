@@ -29,7 +29,7 @@ export const registerUser = async (userInfo) => {
 
       // Existing email
       if (status === 409) {
-        return {data: null, error: {validationError: null, conflictError: serverError.msg }}
+        return {data: null, error: {validationError: null, conflictError: serverError.message }}
       }
 
       if (status === 400) {
@@ -39,7 +39,7 @@ export const registerUser = async (userInfo) => {
         return {data: null, error: {validationError: errorsObject, conflictError: null }}
       }
 
-      throw new Error(serverError.msg)
+      throw new Error(serverError.message)
       
     } else {
       throw new Error('Network error or no response from the server');
@@ -68,10 +68,10 @@ export const loginUser = async (userInfo) => {
       }
 
       if (serverError.msg === 'Incorrect email or password') {
-        return {data: null, error: {validationError: null, credentialError: serverError.msg}}
+        return {data: null, error: {validationError: null, credentialError: serverError.message}}
       }
 
-      throw new Error(serverError.msg)
+      throw new Error(serverError.message)
     } else {
      
       throw new Error('Network error or no response from the server');

@@ -1,9 +1,18 @@
 import {Link} from 'react-router-dom';
+import {useContext} from 'react';
+import AppContext from '../config/StateContext';
+
 
 const Nav = () => {
+  const {dispatch} = useContext(AppContext);
 
   const handleSignOut = () => {
     /// handle dispatch here
+    dispatch({
+      type: 'setLoggedInUser',
+      data: null,
+    })
+    
   }
   
   return (
