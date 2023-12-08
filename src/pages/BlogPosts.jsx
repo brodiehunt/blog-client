@@ -34,6 +34,7 @@ const BlogPosts = () => {
       <div key={item._id}>
         {item.title}
         <Link to={`/posts/${item._id}/update`} >Update</Link>
+        <Link to={`/posts/${item._id}`} >View</Link>
       </div>
     )
   })

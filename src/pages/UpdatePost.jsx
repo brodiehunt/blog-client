@@ -1,11 +1,12 @@
 import {useContext} from 'react';
-import {useParams, Link} from 'react-router-dom';
+import {useParams, Link, useNavigate} from 'react-router-dom';
 import AppContext from '../config/StateContext.jsx';
 import PostForm from '../components/PostForm.jsx';
 import {updateBlogPost} from '../services/postServices.js';
 
 const UpdatePost = () => {
   const {store, dispatch} = useContext(AppContext);
+  const navigate = useNavigate();
   const {postId} = useParams();
   console.log(postId);
   console.log();
@@ -27,6 +28,7 @@ const UpdatePost = () => {
         type: "updateBlogPost",
         data: response.post
       })
+      navigate(`/posts/${postId}`);
       return response;
     } catch(error) {
       throw error;

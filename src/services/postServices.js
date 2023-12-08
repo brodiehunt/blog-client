@@ -29,3 +29,12 @@ export const updateBlogPost = async (postData) => {
     return {error: error.message};
   }
 }
+
+export const deleteBlogPost = async (postData) => {
+  try {
+    const response = await api.delete(`/api/user/posts/${postData._id}`);
+    return response.data;
+  } catch(error) {
+    return {error: error.message}
+  }
+}
