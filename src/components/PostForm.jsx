@@ -46,7 +46,7 @@ const PostForm = ({initialData, type, apiFunc}) => {
   // Client side validation - send data to api - dispatch new post - re-route
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log('submitted form data', formData);
     const newInputErrors = validatePostForm(formData);
     
     const firstErrorField = Object.keys(newInputErrors).find(field => newInputErrors[field]);
@@ -57,7 +57,6 @@ const PostForm = ({initialData, type, apiFunc}) => {
     }
 
     // Do api call here. 
-    console.log('Success, will now try to access api');
     const newBlogPost = {
       ...initialData, 
       title: formData.title, 

@@ -47,3 +47,8 @@ export const updateProfile = async (profileData) => {
     }
   }
 };
+
+export const getApiKey = async () => {
+    const response = await api.get('/api/user/profile/apiKey');
+    return response.data.apiKey;
+}

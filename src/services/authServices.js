@@ -67,7 +67,7 @@ export const loginUser = async (userInfo) => {
         return {data: null, error: {validationError: errorsObject, credentialError: null }}
       }
 
-      if (serverError.msg === 'Incorrect email or password') {
+      if (serverError.message === 'Incorrect email or password') {
         return {data: null, error: {validationError: null, credentialError: serverError.message}}
       }
 

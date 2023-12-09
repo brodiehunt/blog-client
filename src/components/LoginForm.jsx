@@ -43,7 +43,7 @@ const LoginForm = () => {
 
     setIsLoading(true);
     loginUser(formData).then((response) => {
-
+      console.log('response in .then block')
       if (response.data) {
         console.log('enter dispatch blog', response.data);
         dispatch({
@@ -65,6 +65,7 @@ const LoginForm = () => {
       }
     })
     .catch((error) => {
+      console.log(error.message)
       console.log('catch block in event handler')
       navigate('/error', {message: error.message})
     })
